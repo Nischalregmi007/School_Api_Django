@@ -36,3 +36,14 @@ def delete_student(request, student_id):
     student = get_object_or_404(Admission_data, id=student_id)
     student.delete()
     return Response({"message": "Student deleted successfully"})
+@api_view(['PUT'])
+def update_student(request):
+    data=request.data
+    student = get_object_or_404(Admission_data, id=data['student_id'])
+    student.name=data['name']
+    student.email=data['email']
+    student.phone_number=data['phone_number']
+    student.course=data['course']
+    student.studied_at=data['studied_at']
+    student.save()
+    return Response({"message": "Student updated successfully"})
